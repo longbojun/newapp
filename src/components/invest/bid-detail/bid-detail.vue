@@ -44,6 +44,10 @@
         <li @click="handleClick('record')">投资记录<i class="el-icon-arrow-right"></i></li>
       </ul>
     </div>
+    <!--立即投资-->
+    <div class="invest-btn">
+      <a href="javascript:;">立即投资</a>
+    </div>
   </div>
 </template>
 
@@ -135,4 +139,13 @@
           .el-icon-arrow-right
             float: right
             margin-top: 8px
+    .invest-btn
+      height: 50px
+      line-height: 50px
+      width: 100%
+      text-align: center
+      background: #ff721f
+      a
+        color: #fff
+
 </style>
