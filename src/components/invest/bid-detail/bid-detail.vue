@@ -1,5 +1,6 @@
 <template>
   <div class="bid-detail">
+    <Header :title="title"></Header>
     <div class="bid-main">
       <div class="bid-num">
         <div class="bid-num-left">
@@ -47,16 +48,19 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import Header from 'base/header/header'
   import {getData} from 'api/post'
   export default{
     data(){
       return {
+        title: '',
         bidDetail: ''
       }
     },
     mounted(){
       getData('/invest/detail', '', {id: this.$route.query.id}).then(res => {
         this.bidDetail = res.data.data
+        this.title = this.bidDetail.name
       })
     },
     methods: {
@@ -64,12 +68,16 @@
         const id = this.$route.query.id
         this.$router.push({path: param, query: {id: id}})
       }
+    },
+    components: {
+      Header
     }
   }
 </script>
 
 <style lang="stylus">
   .bid-detail
+    margin: 60px 0
     .bid-main
       background: linear-gradient(to bottom, #ff721f 0, #ff862a 100%);
       .bid-num

@@ -1,5 +1,6 @@
 <template>
   <div class="record-list">
+    <Header :title="title"></Header>
     <ul class="content">
       <li v-for="(item,index) in list" :key="item.investTimeStr">
         <el-row>
@@ -28,11 +29,13 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import Header from 'base/header/header'
   import {getData} from 'api/post'
   import {formatDate} from 'common/js/common'
   export default{
     data(){
       return {
+        title: '投资记录',
         list: []
       }
     },
@@ -50,6 +53,9 @@
       formatDate(time){
         return formatDate(time * 1000, 2)
       }
+    },
+    components: {
+      Header
     }
   }
 </script>
@@ -58,6 +64,7 @@
   .record-list
     background: #fff
     .content
+      margin-top: 60px
       li
         padding: 10px 5px
         .first-row

@@ -18,16 +18,16 @@ export default new Router({
     },
     {
       path: '/invest',
-      name: 'BidList',
+      name: 'Invest',
       component: resolve => {
-        require(['components/invest/bid-list/bid-list'], resolve)// 投资列表
+        require(['components/invest/index/index'], resolve)// 投资列表
       },
       children: [
         {
           path: 'list',
           name: 'BidLists',
           component: resolve => {
-            require(['base/list/list'], resolve)// 投资详情
+            require(['components/invest/bid-list/bid-list'], resolve)// 投资列表
           }
         },
         {
@@ -71,16 +71,6 @@ export default new Router({
       }
     },
     {
-      path: '/investRecord',
-      name: 'invest-record',
-      component: resolve => {
-        require(['components/member/invest-record/invest-record'], resolve) // 投资记录
-      },
-      meta: {
-        requireqAuth: true
-      }
-    },
-    {
       path: '/activity',
       name: 'Activity',
       component: resolve => {
@@ -101,5 +91,13 @@ export default new Router({
         require(['components/register/register'], resolve) // 注册
       }
     }
-  ]
+  ],
+  // 跳转的页面自动滚动到头部
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return {x: 0, y: 0}
+    }
+  }
 })

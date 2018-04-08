@@ -9,7 +9,7 @@
         </el-col>
         <el-col :span="6">
           <router-link :to="{path:'/invest/list'}">
-            <div class="grid-content"><i class="el-icon-document"></i>投资</div>
+            <div class="grid-content"><i class="el-icon-document"></i>出借</div>
           </router-link>
 
         </el-col>

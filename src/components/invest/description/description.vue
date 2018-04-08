@@ -1,15 +1,20 @@
 <template>
-  <div class="description">
-    <p v-html="data"></p>
+  <div>
+    <Header :title="title"></Header>
+    <div class="description">
+      <p v-html="data"></p>
+    </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import Header from 'base/header/header'
   import {getData} from 'api/post'
   import {removeStyle} from 'common/js/common'
   export default{
     data(){
       return {
+        title: '借款描述',
         data: ''
       }
     },
@@ -17,6 +22,9 @@
       getData('/invest/describe', '', {id: this.$route.query.id}).then(res => {
         this.data = removeStyle(res.data.data)
       })
+    },
+    components: {
+      Header
     }
   }
 </script>
