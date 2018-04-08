@@ -1,5 +1,5 @@
 <template>
-  <router-view></router-view>
+<div>我的优惠</div>
 </template>
 
 <script type="text/ecmascript-6">

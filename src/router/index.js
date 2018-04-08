@@ -85,11 +85,83 @@ export default new Router({
       path: '/member',
       name: 'Member',
       component: resolve => {
-        require(['components/member/member'], resolve)// 个人账号
+        require(['components/member/index/index'], resolve)// 账户中心
       },
       meta: {
         requireAuth: true
-      }
+      },
+      children: [
+        {
+          path: 'account',
+          name: 'm-account',
+          component: resovle => {
+            require(['components/member/account-center/account-center'], resovle) // 账户中心
+          }
+        },
+        {
+          path: 'record',
+          name: 'm-record',
+          component: resovle => {
+            require(['components/member/invest-record/invest-record'], resovle) // 投资记录
+          }
+        },
+        {
+          path: 'assets',
+          name: 'm-assets',
+          component: resolve => {
+            require(['components/member/user-assets/user-assets'], resolve) // 我的资产
+          }
+        },
+        {
+          path: 'moneyRecord',
+          name: 'm-moneyRecord',
+          component: resolve => {
+            require(['components/member/money-record/money-record'], resolve) // 资金记录
+          }
+        },
+        {
+          path: 'autoInvest',
+          name: 'm-autoInvest',
+          component: resolve => {
+            require(['components/member/auto-invest/auto-invest'], resolve) // 自动投标
+          }
+        },
+        {
+          path: 'redEnvelope',
+          name: 'm-red-envelope',
+          component: resolve => {
+            require(['components/member/red-envelope/red-envelope'], resolve) // 我的优惠
+          }
+        },
+        {
+          path: 'investItem',
+          name: 'm-investItem',
+          component: resolve => {
+            require(['components/member/invest-item/invest-item'], resolve) // 投资项目
+          }
+        },
+        {
+          path: 'settings',
+          name: 'm-settings',
+          component: resolve => {
+            require(['components/member/settings/settings'], resolve) // 账户设置
+          }
+        },
+        {
+          path: 'inviteFriends',
+          name: 'm-invite-friends',
+          component: resolve => {
+            require(['components/member/invite-friends/invite-friends'], resolve) // 邀请好友
+          }
+        },
+        {
+          path: 'address',
+          name: 'm-address',
+          component: resolve => {
+            require(['components/member/address/address'], resolve) // 地址
+          }
+        }
+      ]
     },
     {
       path: '/activity',

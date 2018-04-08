@@ -63,17 +63,17 @@
           {
             name: '投资记录',
             img: 'https://static.yinmimoney.com/yinmi/images/weixin/images/account_1.png',
-            path: 'investRecord'
+            path: 'record'
           },
           {
             name: '我的资产',
             img: 'https://static.yinmimoney.com/yinmi/images/weixin/images/account_2.png',
-            path: 'investRecord'
+            path: ''
           },
           {
             name: '资金记录',
             img: 'https://static.yinmimoney.com/yinmi/images/weixin/images/account_3.png',
-            path: 'investRecord'
+            path: ''
           },
           {name: '自动投标', img: 'https://static.yinmimoney.com/yinmi/images/weixin/images/account_4.png', path: ''},
           {name: '我的优惠', img: 'https://static.yinmimoney.com/yinmi/images/weixin/images/account_5.png', path: ''},
@@ -97,7 +97,7 @@
     },
     methods: {
       handleClick(path){
-          console.log(path)
+        console.log(path)
         this.$router.push({path: path})
       }
     }

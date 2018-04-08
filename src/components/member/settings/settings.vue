@@ -1,5 +1,5 @@
 <template>
-  <router-view></router-view>
+<div>账户设置</div>
 </template>
 
 <script type="text/ecmascript-6">

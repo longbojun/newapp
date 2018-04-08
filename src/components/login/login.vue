@@ -47,7 +47,7 @@
               isInvestor: res.data.isInvestor
             }
             setCookie(data)
-            this.$router.push({path: '/member'})
+            this.$router.push({path: '/member/account'})
           } else {
             this.$refs.errText.innerHTML = res.msg
           }
@@ -61,7 +61,7 @@
   .login
     background: #fff
     .logo
-      margin-bottom: 40px
+      padding: 40px 0
       img
         display: block
         margin: 0 auto

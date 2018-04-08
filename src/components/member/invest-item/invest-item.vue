@@ -1,5 +1,7 @@
 <template>
-  <router-view></router-view>
+<div>
+  投资项目
+</div>
 </template>
 
 <script type="text/ecmascript-6">

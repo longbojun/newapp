@@ -1,5 +1,5 @@
 <template>
-  <router-view></router-view>
+<div>邀请好友</div>
 </template>
 
 <script type="text/ecmascript-6">

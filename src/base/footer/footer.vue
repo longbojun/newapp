@@ -19,7 +19,7 @@
           </router-link>
         </el-col>
         <el-col :span="6">
-          <router-link :to="{path:'/member'}">
+          <router-link :to="{path:'/member/account'}">
             <div class="grid-content"><i class="el-icon-setting"></i>账户</div>
           </router-link>
         </el-col>
