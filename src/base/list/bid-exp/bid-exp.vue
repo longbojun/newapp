@@ -4,6 +4,7 @@
     <div class="list-item"
          v-for="exp in expList"
          :key="exp.id"
+         @click.capture="bidDetail(exp.id)"
     >
       <el-row>
         <el-col :span="20">
@@ -64,7 +65,7 @@
     methods: {
       bidDetail(id){
         this.$router.push({
-          path: '/detail',
+          path: 'expDetail',
           query: {
             id: id
           }

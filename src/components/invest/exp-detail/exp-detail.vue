@@ -14,16 +14,16 @@
       </div>
       <div class="bid-money">
         <div class="item">
-          <h5 class="text">标的总额</h5>
-          <p>{{bidDetail.accountStr}}元</p>
+          <h5 class="text">账户体验金余额</h5>
+          <p>0.00元</p>
         </div>
         <div class="item">
-          <h5 class="text">可投余额</h5>
-          <p>{{bidDetail.leftAccountYesStr}}元</p>
+          <h5 class="text">投标人数</h5>
+          <p>{{bidDetail.investPersons}}人</p>
         </div>
         <div class="item">
-          <h5 class="text">投资奖励</h5>
-          <p>无</p>
+          <h5 class="text">投资期限</h5>
+          <p>{{bidDetail.timeLimitStr}}</p>
         </div>
       </div>
     </div>
@@ -31,17 +31,15 @@
     <div class="bid-intro">
       <ul>
         <li>还款方式：{{bidDetail.styleStr}}</li>
-        <li>起息时间：{{bidDetail.startInterestTimeStr | formatDate}}</li>
-        <li>最高投标：{{bidDetail.mostAccountStr}}元</li>
-        <li>最低投标：{{bidDetail.lowestAccountStr}}元</li>
+        <li>发布时间：{{bidDetail.releaseTimeStr | formatDate}}</li>
+        <li>计息起息日：即投机即起息</li>
       </ul>
     </div>
     <!--描述-->
     <div class="bid-desc">
       <ul>
-        <li @click="handleClick('desc')">借款描述<i class="el-icon-arrow-right"></i></li>
-        <li @click="handleClick('borrow')">借款资料<i class="el-icon-arrow-right"></i></li>
-        <li @click="handleClick('record')">投资记录<i class="el-icon-arrow-right"></i></li>
+        <li @click="handleClick('expDesc')">借款描述<i class="el-icon-arrow-right"></i></li>
+        <li @click="handleClick('expRecord')">投资记录<i class="el-icon-arrow-right"></i></li>
       </ul>
     </div>
   </div>
@@ -59,7 +57,7 @@
       }
     },
     mounted(){
-      getData('/invest/detail', '', {id: this.$route.query.id}).then(res => {
+      getData('/investExp/expDetail', '', {id: this.$route.query.id}).then(res => {
         this.bidDetail = res.data.data
         this.title = this.bidDetail.name
       })

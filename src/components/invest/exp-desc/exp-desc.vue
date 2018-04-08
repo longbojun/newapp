@@ -19,7 +19,7 @@
       }
     },
     mounted(){
-      getData('/invest/describe', '', {id: this.$route.query.id}).then(res => {
+      getData('/investExp/expDescribe', '', {id: this.$route.query.id}).then(res => {
         this.data = removeStyle(res.data.data)
       })
     },
@@ -31,6 +31,7 @@
 
 <style lang="stylus">
   .description
+    margin-top: 60px
     padding: 10px
     p
       line-height: 30px

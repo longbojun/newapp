@@ -38,24 +38,45 @@ export default new Router({
           }
         },
         {
-          path: 'borrow',
-          name: 'Borrow',
+          path: 'expDetail',
+          name: 'expDetail',
           component: resolve => {
-            require(['components/invest/borrow/borrow'], resolve) // 借款资料
+            require(['components/invest/exp-detail/exp-detail'], resolve)// 投资详情
           }
         },
         {
-          path: 'description',
+          path: 'borrow',
+          name: 'Borrow',
+          component: resolve => {
+            require(['components/invest/bid-borrow/bid-borrow'], resolve) // 借款资料
+          }
+        },
+        {
+          path: 'desc',
           name: 'Description',
           component: resolve => {
-            require(['components/invest/description/description'], resolve) // 借款描述
+            require(['components/invest/bid-desc/bid-desc'], resolve) // 借款描述
+          }
+        },
+        {
+          path: 'expDesc',
+          name: 'expDesc',
+          component: resolve => {
+            require(['components/invest/exp-desc/exp-desc'], resolve) // 借款描述
           }
         },
         {
           path: 'record',
           name: 'Record',
           component: resolve => {
-            require(['components/invest/record/record'], resolve) // 投资记录
+            require(['components/invest/bid-record/bid-record'], resolve) // 投资记录
+          }
+        },
+        {
+          path: 'expRecord',
+          name: 'expRecord',
+          component: resolve => {
+            require(['components/invest/exp-record/exp-record'], resolve) // 投资记录
           }
         }
       ]
