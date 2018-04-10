@@ -21,7 +21,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {getData, setCookie} from 'api/post'
+  import {getData, setCookie, clearCookie} from 'api/post'
 
   export default {
     data() {
@@ -52,7 +52,12 @@
             this.$refs.errText.innerHTML = res.msg
           }
         })
-      }
+      },
+
+    },
+    mounted(){
+      // 清除缓存
+      clearCookie('token')
     }
   }
 </script>

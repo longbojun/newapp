@@ -1,0 +1,19 @@
+## elementUI主题色修改
+
+    npm i element-theme -g
+    
+    npm i element-theme-chalk -D
+    
+    et -i [可以自定义变量文件]
+    
+    element-variables.scss修改变量
+    
+    et
+    
+    import '../theme/index.css'
+    
+    import ElementUI from 'element-ui'
+    
+    import Vue from 'vue'
+    
+    Vue.use(ElementUI)

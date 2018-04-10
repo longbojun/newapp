@@ -78,6 +78,13 @@ export default new Router({
           component: resolve => {
             require(['components/invest/exp-record/exp-record'], resolve) // 投资记录
           }
+        },
+        {
+          path: 'investment',
+          name: 'Investment',
+          component: resolve => {
+            require(['components/invest/bid-investment/bid-investment'], resolve) // 投资记录
+          }
         }
       ]
     },

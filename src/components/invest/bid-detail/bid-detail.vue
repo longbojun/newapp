@@ -46,14 +46,14 @@
     </div>
     <!--立即投资-->
     <div class="invest-btn">
-      <a href="javascript:;">立即投资</a>
+      <a href="/invest/investment">立即投资</a>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import Header from 'base/header/header'
-  import {getData} from 'api/post'
+  import {getData, getCookie} from 'api/post'
   import {formatDate} from 'common/js/common'
   export default{
     data(){
@@ -63,9 +63,18 @@
       }
     },
     mounted(){
-      getData('/invest/detail', '', {id: this.$route.query.id}).then(res => {
-        this.bidDetail = res.data.data
-        this.title = this.bidDetail.name
+      const isLogin = getCookie('token')
+      let token = ''
+      if (isLogin) {
+        token = isLogin
+      }
+      getData('/invest/detail', token, {id: this.$route.query.id}).then(res => {
+        if (res.data.success && res.data.code === '0') {
+          this.bidDetail = res.data.data
+          this.title = this.bidDetail.name
+        } else if (res.data.code === 'c017') {
+          this.$router.push('/login')
+        }
       })
     },
     methods: {
