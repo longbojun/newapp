@@ -41,7 +41,7 @@ export default new Router({
           path: 'expDetail',
           name: 'expDetail',
           component: resolve => {
-            require(['components/invest/exp-detail/exp-detail'], resolve)// 投资详情
+            require(['components/invest/exp-detail/exp-detail'], resolve)// 体验金投资详情
           }
         },
         {
@@ -62,7 +62,7 @@ export default new Router({
           path: 'expDesc',
           name: 'expDesc',
           component: resolve => {
-            require(['components/invest/exp-desc/exp-desc'], resolve) // 借款描述
+            require(['components/invest/exp-desc/exp-desc'], resolve) // 体验金借款描述
           }
         },
         {
@@ -126,13 +126,13 @@ export default new Router({
             require(['components/member/money-record/money-record'], resolve) // 资金记录
           }
         },
-        {
-          path: 'autoInvest',
-          name: 'm-autoInvest',
-          component: resolve => {
-            require(['components/member/auto-invest/auto-invest'], resolve) // 自动投标
-          }
-        },
+        // {
+        //   path: 'autoInvest',
+        //   name: 'm-autoInvest',
+        //   component: resolve => {
+        //     require(['components/member/auto-invest/auto-invest'], resolve) // 自动投标
+        //   }
+        // },
         {
           path: 'redEnvelope',
           name: 'm-red-envelope',
