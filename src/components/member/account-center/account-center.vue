@@ -68,19 +68,19 @@
           {
             name: '我的资产',
             img: 'https://static.yinmimoney.com/yinmi/images/weixin/images/account_2.png',
-            path: ''
+            path: 'assets'
           },
           {
             name: '资金记录',
             img: 'https://static.yinmimoney.com/yinmi/images/weixin/images/account_3.png',
-            path: ''
+            path: 'moneyRecord'
           },
-          {name: '自动投标', img: 'https://static.yinmimoney.com/yinmi/images/weixin/images/account_4.png', path: ''},
-          {name: '我的优惠', img: 'https://static.yinmimoney.com/yinmi/images/weixin/images/account_5.png', path: ''},
-          {name: '投资项目', img: 'https://static.yinmimoney.com/yinmi/images/weixin/images/account_6.png', path: ''},
-          {name: '账户设置', img: 'https://static.yinmimoney.com/yinmi/images/weixin/images/account_7.png', path: ''},
-          {name: '邀请好友', img: 'https://static.yinmimoney.com/yinmi/images/weixin/images/account_8.png', path: ''},
-          {name: '我的地址', img: 'https://static.yinmimoney.com/yinmi/images/weixin/images/account_10.png', path: ''},
+          {name: '自动投标', img: 'https://static.yinmimoney.com/yinmi/images/weixin/images/account_4.png', path: 'autoInvest'},
+          {name: '我的优惠', img: 'https://static.yinmimoney.com/yinmi/images/weixin/images/account_5.png', path: 'redEnvelope'},
+          {name: '投资项目', img: 'https://static.yinmimoney.com/yinmi/images/weixin/images/account_6.png', path: 'investItem'},
+          {name: '账户设置', img: 'https://static.yinmimoney.com/yinmi/images/weixin/images/account_7.png', path: 'settings'},
+          {name: '邀请好友', img: 'https://static.yinmimoney.com/yinmi/images/weixin/images/account_8.png', path: 'inviteFriends'},
+          {name: '我的地址', img: 'https://static.yinmimoney.com/yinmi/images/weixin/images/account_10.png', path: 'address'},
           {name: '调查问卷', img: 'https://static.yinmimoney.com/yinmi/images/weixin/images/survey.png', path: ''}
         ]
       }

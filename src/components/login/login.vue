@@ -52,7 +52,7 @@
             this.$refs.errText.innerHTML = res.msg
           }
         })
-      },
+      }
 
     },
     mounted(){

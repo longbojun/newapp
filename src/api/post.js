@@ -30,7 +30,7 @@ export function post(config) {
   })
 }
 // 区分需要token和data的
-export function getData(url, token = '', data = {}) {
+export function getData(url, token = '', data = '') {
   if (!token) {
     token = ''
   } else {
