@@ -6,7 +6,9 @@
         <el-col :span="24" class="content-item-header">
           <h5 class="mb-10">{{item.name}}</h5>
           <el-row class="mb-10">
-            <el-col :span="20"><el-progress :percentage="Number(item.scalesStr)" :show-text="false"></el-progress></el-col>
+            <el-col :span="20">
+              <el-progress :percentage="Number(item.scalesStr)" :show-text="false"></el-progress>
+            </el-col>
             <el-col :span="4" class="txt-right">{{Number(item.scalesStr)}}%</el-col>
           </el-row>
           <el-row class="mb-10">
@@ -52,7 +54,7 @@
     },
     methods: {
       _getData(){
-        getData('/account/myInvestProject', 1,{pageNo: 1, pageSize: 10}).then(res => {
+        getData('/account/myInvestProject', 1, {pageNo: 1, pageSize: 10}).then(res => {
           if (res.data.success && res.data.code === '0') {
             this.invest = res.data.data
           } else if (res.data.code === 'c017' || res.data.code === 'c012') {
