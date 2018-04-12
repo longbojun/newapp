@@ -122,6 +122,7 @@
 
 <style lang="stylus">
   .m-center
+    margin-bottom: 60px
     background: #fff
     .m-data
       .m-top
@@ -148,7 +149,6 @@
           text-align: center
           .text
             margin-bottom: 10px
-
     .m-list
       .el-row
         padding: 10px 5px

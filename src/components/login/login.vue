@@ -4,18 +4,47 @@
       <img src="./logo.png" alt="" width="80" height="80">
     </div>
     <div class="login-form">
-      <div class="login-form-group">
-        <el-input placeholder="请输入手机号码" prefix-icon="el-icon-search" v-model="userName" :maxlength="11"></el-input>
-      </div>
-      <div class="login-form-group">
-        <el-input placeholder="请输入密码" prefix-icon="el-icon-search" v-model="passWord" :maxlength="16"></el-input>
-      </div>
-      <div class="login-form-group">
-        <p class="err-text" ref="errText"></p>
-      </div>
-      <div class="login-form-group">
-        <el-button type="primary" @click="handleSubmit">登录</el-button>
-      </div>
+      <el-form>
+        <div class="login-form-group">
+          <el-input type="text"
+                    placeholder="请输入手机号码"
+                    prefix-icon="el-icon-account"
+                    v-model="userName"
+                    :maxlength="11">
+
+          </el-input>
+        </div>
+        <div class="login-form-group">
+          <el-input type="password"
+                    placeholder="请输入密码"
+                    prefix-icon="el-icon-password"
+                    v-model="passWord"
+                    :maxlength="16">
+
+          </el-input>
+        </div>
+        <div class="login-form-group">
+          <el-alert :title="errText"
+                    type="error"
+                    v-show="errShow"
+                    :closable="false">
+
+          </el-alert>
+        </div>
+        <div class="login-form-group">
+          <el-button type="primary" @click="handleSubmit">登录</el-button>
+        </div>
+        <div class="login-form-group">
+          <el-row>
+            <el-col :span="12" class="txt-left">
+              <router-link to="">忘记密码</router-link>
+            </el-col>
+            <el-col :span="12" class="txt-right">
+              <router-link to="">立即注册</router-link>
+            </el-col>
+          </el-row>
+        </div>
+      </el-form>
     </div>
   </div>
 </template>
@@ -27,7 +56,9 @@
     data() {
       return {
         userName: '',
-        passWord: ''
+        passWord: '',
+        errShow: false,
+        errText: ''
       }
     },
     methods: {
@@ -36,7 +67,6 @@
           userName: this.userName,
           passWord: this.passWord
         }
-        // 测试账号 15372422339
         getData('/authenticate/login', '', data).then(res => {
           res = res.data
           if (res.success && res.code === '0') {
@@ -49,7 +79,8 @@
             setCookie(data)
             this.$router.push({path: '/member/account'})
           } else {
-            this.$refs.errText.innerHTML = res.msg
+            this.errShow = true
+            this.errText = res.msg
           }
         })
       }
@@ -64,7 +95,7 @@
 
 <style lang="stylus">
   .login
-    background: #fff
+    /*background: #fff*/
     .logo
       padding: 40px 0
       img
@@ -82,4 +113,17 @@
           border-color: #ff5f0f
         .err-text
           color: red
+        .txt-left
+          text-align: left
+          a
+            color: #ff5f0f
+        .txt-right
+          text-align: right
+          a
+            color: #ff5f0f
+      .el-input--prefix
+        .el-input__inner
+          padding: 10px 30px
+          line-height: normal
+
 </style>
