@@ -6,6 +6,7 @@ const md5 = require('js-md5')
 let loading
 function startLoading() {
   loading = Loading.service({
+    fullscreen: true,
     lock: true,
     text: '加载中……',
     background: 'rgba(0, 0, 0, 0.7)'

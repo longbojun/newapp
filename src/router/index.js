@@ -3,7 +3,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  mode: 'history', // 默认hash
   routes: [
     {
       path: '/',
@@ -189,6 +189,13 @@ export default new Router({
       name: 'Register',
       component: resolve => {
         require(['components/register/register'], resolve) // 注册
+      }
+    },
+    {
+      path: '*',
+      name: '404',
+      component: resolve => {
+        require(['base/404/404.vue'], resolve)
       }
     }
   ],
