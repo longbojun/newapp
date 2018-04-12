@@ -1,6 +1,21 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
-var md5 = require('js-md5')
+import {Loading} from 'element-ui'
+const md5 = require('js-md5')
+// 定义loading
+let loading
+function startLoading() {
+  loading = Loading.service({
+    lock: true,
+    text: '加载中……',
+    background: 'rgba(0, 0, 0, 0.7)'
+  })
+}
+
+function endLoading() {
+  loading.close()
+}
+
 // 定义post函数，config为配置
 export function post(config) {
   // 返回promise对象
@@ -18,6 +33,26 @@ export function post(config) {
       },
       timeout: 3000
     })
+    // 请求拦截（配置发送请求的信息）
+    instance.interceptors.request.use(function (config) {
+      // 处理请求之前的配置
+      startLoading()
+      return config
+    }, function (error) {
+      // 请求失败的处理
+      return Promise.reject(error)
+    })
+
+    // 响应拦截（配置请求回来的信息）
+    instance.interceptors.response.use(function (response) {
+      // 处理响应数据
+      endLoading()
+      return response
+    }, function (error) {
+      // 处理响应失败
+      return Promise.reject(error)
+    })
+
     // 请求成功后执行的函数
     instance(config).then(res => {
       // console.log(res)

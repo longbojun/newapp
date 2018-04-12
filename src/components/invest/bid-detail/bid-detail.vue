@@ -96,7 +96,7 @@
 
 <style lang="stylus">
   .bid-detail
-    margin: 60px 0
+    margin-top: 60px
     .bid-main
       background: linear-gradient(to bottom, #ff721f 0, #ff862a 100%);
       .bid-num
