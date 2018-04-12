@@ -62,8 +62,18 @@
     },
     mounted(){
       getData('/investExp/expDetail', '', {id: this.$route.query.id}).then(res => {
-        this.bidDetail = res.data.data
-        this.title = this.bidDetail.name
+        if (res.data.success && res.data.code === '0') {
+          this.bidDetail = res.data.data
+          this.title = this.bidDetail.name
+        } else if (res.data.code === 'c017' || res.data.code === 'c012') {
+          this.$router.push('/login')
+        } else if (res.data.code === 'c030') {
+          // 标的不存在
+          this.$router.push('/invest/list')
+        } else if (res.data.code === 'c031') {
+          // 参数缺失
+          this.$router.push('/invest/list')
+        }
       })
     },
     methods: {

@@ -46,7 +46,13 @@
         pageSize: 10
       }
       getData('/investExp/expTenderList', '', data).then(res => {
-        this.list = res.data.data.list
+        if (res.data.success && res.data.code === '0') {
+          this.list = res.data.data.list
+        } else if (res.data.code === 'c030') {
+          this.$router.push('/invest/list')// 标的不存在
+        } else if (res.data.code === 'c031') {
+          this.$router.push('/invest/list') // 参数缺失
+        }
       })
     },
     filters: {

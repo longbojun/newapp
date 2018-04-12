@@ -46,7 +46,9 @@
         pageSize: 10
       }
       getData('/invest/investRecord', '', data).then(res => {
-        this.list = res.data.data.list
+          if (res.data.success && res.data.code === '0'){
+            this.list = res.data.data.list
+          }
       })
     },
     filters: {
