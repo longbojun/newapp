@@ -27,7 +27,7 @@
         <el-col :span="24" class="content-item-footer">
           <h5 class="title">借款协议已使用电子签名，请用Adobe阅读器浏览</h5>
           <el-row>
-            <el-col :span="16" :offset="12">
+            <el-col :span="24" class="btn-group">
               <el-button type="text" size="small" disabled v-if="item.contractUrl">合同生成中</el-button>
               <el-button type="plain" size="small" v-else>下载协议</el-button>
               <el-button type="primary" size="small">回款计划</el-button>
@@ -70,11 +70,10 @@
 <style lang="stylus">
   .invest-item
     .content
-      margin: 70px 0
+      margin-top: 70px
       .content-item
         .content-item-header
           padding: 10px 20px
-          /*margin: 10px 0*/
           background: #fff
           border-bottom: 2px solid #f4f4f4
           .mb-10
@@ -91,4 +90,6 @@
           .title
             margin: 20px 0
             font-size: 12px
+          .btn-group
+            text-align: right
 </style>
