@@ -4,35 +4,29 @@
       <img src="./logo.png" alt="" width="80" height="80">
     </div>
     <div class="login-form">
-      <el-form>
+      <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
         <div class="login-form-group">
-          <el-input type="text"
-                    placeholder="请输入手机号码"
-                    prefix-icon="el-icon-account"
-                    v-model="userName"
-                    :maxlength="11">
-
-          </el-input>
+          <el-form-item prop="userName" ref="userName">
+            <el-input type="text"
+                      placeholder="请输入手机号码"
+                      prefix-icon="el-icon-account"
+                      v-model="ruleForm.userName"
+                      :maxlength="11">
+            </el-input>
+          </el-form-item>
         </div>
         <div class="login-form-group">
-          <el-input type="password"
-                    placeholder="请输入密码"
-                    prefix-icon="el-icon-password"
-                    v-model="passWord"
-                    :maxlength="16">
-
-          </el-input>
+          <el-form-item prop="passWord" ref="passWord">
+            <el-input type="password"
+                      placeholder="请输入密码"
+                      prefix-icon="el-icon-password"
+                      v-model="ruleForm.passWord"
+                      :maxlength="16">
+            </el-input>
+          </el-form-item>
         </div>
         <div class="login-form-group">
-          <el-alert :title="errText"
-                    type="error"
-                    v-show="errShow"
-                    :closable="false">
-
-          </el-alert>
-        </div>
-        <div class="login-form-group">
-          <el-button type="primary" @click="handleSubmit">登录</el-button>
+          <el-button type="primary" @click="handleSubmit('ruleForm')">登录</el-button>
         </div>
         <div class="login-form-group">
           <el-row>
@@ -51,36 +45,62 @@
 
 <script type="text/ecmascript-6">
   import {getData, setCookie, clearCookie} from 'api/post'
+  import {regPhone} from 'common/js/common'
 
   export default {
     data() {
       return {
-        userName: '',
-        passWord: '',
-        errShow: false,
-        errText: ''
+        ruleForm: {
+          userName: '',
+          passWord: ''
+        },
+        rules: {
+          userName: [
+            {required: true, message: '请输入手机号码', trigger: 'blur'},
+            {max: 11, message: '请输入正确的手机号码', trigger: 'blur'},
+            {pattern: regPhone(), message: '暂不支持该号段', trigger: 'blur'}
+          ],
+          passWord: [
+            {required: true, message: '请输入您的密码', trigger: 'blur'}
+          ]
+        }
       }
     },
     methods: {
-      handleSubmit(){
-        const data = {
-          userName: this.userName,
-          passWord: this.passWord
-        }
-        getData('/authenticate/login', '', data).then(res => {
-          res = res.data
-          if (res.success && res.code === '0') {
+      handleSubmit(formName){
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
             const data = {
-              userName: this.userName,
-              token: res.data.token,
-              isBorrower: res.data.isBorrower,
-              isInvestor: res.data.isInvestor
+              userName: this.ruleForm.userName,
+              passWord: this.ruleForm.passWord
             }
-            setCookie(data)
-            this.$router.push({path: '/member/account'})
+            getData('/authenticate/login', '', data).then(res => {
+              res = res.data
+              if (res.success && res.code === '0') {
+                const data = {
+                  userName: this.userName,
+                  token: res.data.token,
+                  isBorrower: res.data.isBorrower,
+                  isInvestor: res.data.isInvestor
+                }
+                setCookie(data)
+                this.$router.push({path: '/member/account'})
+              } else {
+                if (res.code === 'c004') {
+                  this.$refs.userName.error = res.msg
+                } else if (res.code === 'c006') {
+                  this.$refs.passWord.error = res.msg
+                }
+//                  this.$refs.errorText.error = res.msg
+//                  console.log( this.$refs[formName])
+//                this.rules.passWord[0].message = res.msg
+//                this.errShow = true
+//                this.errText = res.msg
+              }
+            })
           } else {
-            this.errShow = true
-            this.errText = res.msg
+            console.log('erro submit')
+            return false
           }
         })
       }
