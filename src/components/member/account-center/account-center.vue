@@ -50,10 +50,12 @@
         <el-col :span="2"><i class="el-icon-arrow-right"></i></el-col>
       </el-row>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import Footer from 'base/footer/footer'
   import {getData} from 'api/post'
   export default{
     data(){
@@ -116,7 +118,8 @@
         console.log(path)
         this.$router.push({path: path})
       }
-    }
+    },
+    components: {Footer}
   }
 </script>
 

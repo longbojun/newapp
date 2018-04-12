@@ -72,9 +72,6 @@
         })
       }
     }
-//    mounted(){
-//      this.isShow = false
-//    }
   }
 </script>
 

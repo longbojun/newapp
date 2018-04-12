@@ -6,18 +6,13 @@
           <router-view></router-view>
         </keep-alive>
       </el-main>
-      <Footer/>
     </el-container>
   </div>
 </template>
 
 <script>
-  import Footer from 'base/footer/footer'
   export default {
-    name: 'App',
-    components: {
-      Footer
-    }
+    name: 'App'
   }
 </script>
 

@@ -5,11 +5,13 @@
       <BidExp :expList="expList"></BidExp>
       <BidItem :bidList="bidList"></BidItem>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import Header from 'base/header/header'
+  import Footer from 'base/footer/footer'
   import BidExp from 'base/list/bid-exp/bid-exp'
   import BidItem from 'base/list/bid-item/bid-item'
   import {getData} from 'api/post'
@@ -41,6 +43,7 @@
     },
     components: {
       Header,
+      Footer,
       BidExp,
       BidItem
     }

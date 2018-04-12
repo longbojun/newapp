@@ -32,7 +32,7 @@
           </a>
         </el-col>
       </el-row>
-      <el-row class="invest-item">
+      <el-row class="invest-item" @click.capture="bidDetail(hot.id)">
         <el-col :span="24">
           <div class="item-detail">
             <el-row class="item-name">
@@ -73,7 +73,7 @@
           </div>
         </el-col>
       </el-row>
-      <el-row class="invest-item">
+      <el-row class="invest-item" @click.capture="bidDetail(hot.id)">
         <el-col :span="24">
           <div class="item-detail">
             <el-row class="item-name">
@@ -114,7 +114,7 @@
           </div>
         </el-col>
       </el-row>
-      <el-row class="invest-item">
+      <el-row class="invest-item" @click.capture="bidDetail(hot.id)">
         <el-col :span="24">
           <div class="item-detail">
             <el-row class="item-name">
@@ -162,12 +162,13 @@
         <p>客服电话：400-966-0800</p>
       </el-row>
     </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import Footer from 'base/footer/footer'
   import Carousel from 'base/carousel/carousel'
-  import BidItem from 'base/list/bid-item/bid-item'
   import {getData} from 'api/post'
   export default{
     data(){
@@ -186,17 +187,25 @@
       _getData(){
         getData('index/indexBorrow', '', {}).then(res => {
           if (res.data.success && res.data.code === '0') {
-            console.log(res.data.data.hotBorrows)
             this.hot = res.data.data.hotBorrows[0]
           } else if (res.data.code === 'c017' || res.data.code === 'c012') {
             this.$router.push('/login')
+          }
+        })
+      },
+      bidDetail(id){
+        console.log(1)
+        this.$router.push({
+          path: '/invest/detail',
+          query: {
+            id: id
           }
         })
       }
     },
     components: {
       Carousel,
-      BidItem
+      Footer
     }
   }
 </script>
@@ -233,10 +242,10 @@
             font-size: 12px
             color: #000
       .invest-item
-        margin:10px 0
+        margin: 10px 0
         background: #fff
         padding: 20px 12px
-        .item-name,.item-data
+        .item-name, .item-data
           margin-bottom: 8px
       .footer
         padding: 10px 5px

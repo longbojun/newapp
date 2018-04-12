@@ -17,3 +17,17 @@
     import Vue from 'vue'
     
     Vue.use(ElementUI)
+
+
+## 加上index.html加上shortcut失效
+
+  1、根目录下加入图标，
+  
+  2、在build/webpack.dev.conf.js中添加favicon
+  
+     new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: 'index.html',
+        inject: true,
+        favicon:'./favicon.ico'
+      }),
