@@ -188,6 +188,7 @@
         getData('index/indexBorrow', '', {}).then(res => {
           if (res.data.success && res.data.code === '0') {
             this.hot = res.data.data.hotBorrows[0]
+            this.hot.name = '热门标的'
           } else if (res.data.code === 'c017' || res.data.code === 'c012') {
             this.$router.push('/login')
           }

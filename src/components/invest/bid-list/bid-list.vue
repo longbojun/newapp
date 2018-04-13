@@ -38,6 +38,7 @@
           const list = res.data.data.list
           this.expList = list.slice(0, 1)
           this.bidList = list.slice(1)
+          this.bidList[6].name = '热门标的'
         }
       })
     },

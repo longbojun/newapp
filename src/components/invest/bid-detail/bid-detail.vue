@@ -71,6 +71,9 @@
       getData('/invest/detail', token, {id: this.$route.query.id}).then(res => {
         if (res.data.success && res.data.code === '0') {
           this.bidDetail = res.data.data
+          if (this.bidDetail.id === 3263){
+            this.bidDetail.name = '热门标的'
+          }
           this.title = this.bidDetail.name
         } else if (res.data.code === 'c017' || res.data.code === 'c012') {
           this.$router.push('/login')
