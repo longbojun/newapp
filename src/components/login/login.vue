@@ -31,10 +31,10 @@
         <div class="login-form-group">
           <el-row>
             <el-col :span="12" class="txt-left">
-              <router-link to="">忘记密码</router-link>
+              <router-link to="/findpwd">忘记密码</router-link>
             </el-col>
             <el-col :span="12" class="txt-right">
-              <router-link to="">立即注册</router-link>
+              <router-link to="/regsister">立即注册</router-link>
             </el-col>
           </el-row>
         </div>

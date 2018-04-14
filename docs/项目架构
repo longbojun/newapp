@@ -31,3 +31,5 @@
         inject: true,
         favicon:'./favicon.ico'
       }),
+      
+## 图形验证码

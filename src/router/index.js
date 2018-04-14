@@ -192,6 +192,20 @@ export default new Router({
       }
     },
     {
+      path: '/findpwd',
+      name: 'FindPassword',
+      component: resolve => {
+        require(['components/find-password/find-password'], resolve) // 找回密码
+      }
+    },
+    {
+      path: '/regsister',
+      name: 'Regsister',
+      component: resolve => {
+        require(['components/regsister/regsister'], resolve) // 找回密码
+      }
+    },
+    {
       path: '*',
       name: '404',
       component: resolve => {
