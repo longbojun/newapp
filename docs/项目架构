@@ -33,3 +33,10 @@
       }),
       
 ## 图形验证码
+
+
+## 参数传递
+
+传递参数：this.$router.push({path: '/findpwdNext', query: {phone:'0000'}})
+
+接收参数：this.$route.query.phone

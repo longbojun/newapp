@@ -199,10 +199,17 @@ export default new Router({
       }
     },
     {
+      path: '/findpwdNext',
+      name: 'FindPassword',
+      component: resolve => {
+        require(['components/find-password/findpwd-next'], resolve) // 找回密码下一步
+      }
+    },
+    {
       path: '/regsister',
       name: 'Regsister',
       component: resolve => {
-        require(['components/regsister/regsister'], resolve) // 找回密码
+        require(['components/regsister/regsister'], resolve) // 注册
       }
     },
     {

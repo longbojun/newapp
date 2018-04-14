@@ -46,7 +46,6 @@
 <script type="text/ecmascript-6">
   import {getData, setCookie, clearCookie} from 'api/post'
   import {regPhone} from 'common/js/common'
-
   export default {
     data() {
       return {
@@ -91,11 +90,6 @@
                 } else if (res.code === 'c006') {
                   this.$refs.passWord.error = res.msg
                 }
-//                  this.$refs.errorText.error = res.msg
-//                  console.log( this.$refs[formName])
-//                this.rules.passWord[0].message = res.msg
-//                this.errShow = true
-//                this.errText = res.msg
               }
             })
           } else {

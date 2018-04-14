@@ -4,22 +4,20 @@
     <div class="find-password-content">
       <el-form :model="ruleForm" :rules="rules" ref="ruleForm">
         <div class="login-form-group">
-          <el-form-item prop="userName" ref="userName">
+          <el-form-item prop="phone" ref="phone">
             <el-input type="text"
                       placeholder="请输入手机号码"
-                      prefix-icon="el-icon-account"
                       v-model="ruleForm.phone"
                       :maxlength="11">
             </el-input>
           </el-form-item>
         </div>
         <div class="login-form-group">
-          <el-form-item prop="passWord" ref="passWord" class="password">
-            <el-input type="password"
+          <el-form-item prop="verify" ref="verify" class="verify">
+            <el-input type="text"
                       placeholder="验证码"
-                      prefix-icon="el-icon-password"
-                      v-model="ruleForm.verification"
-                      :maxlength="16">
+                      v-model="ruleForm.verify"
+                      :maxlength="4">
             </el-input>
             <ImgVerify class="img-verify" @printCanvas="imgVerify"></ImgVerify>
           </el-form-item>
@@ -35,15 +33,24 @@
 <script type="text/ecmascript-6">
   import ImgVerify from 'base/img-verify/img-verify'
   import Header from 'base/header/header'
-  //  import {getData} from 'api/post'
   import {regPhone} from 'common/js/common'
   export default{
     data(){
+      let validateCode = (rule, value, callback) => {
+        if (!value) {
+          return callback(new Error('验证码不能为空'))
+        } else if (value.toUpperCase() !== this.verifyCode) {
+          return callback(new Error('验证码输入有误'))
+        } else {
+          callback()
+        }
+      }
       return {
         title: '找回密码',
+        verifyCode: '',
         ruleForm: {
           phone: '',
-          verification: ''
+          verify: ''
         },
         rules: {
           phone: [
@@ -51,8 +58,8 @@
             {max: 11, message: '请输入正确的手机号码', trigger: 'blur'},
             {pattern: regPhone(), message: '暂不支持该号段', trigger: 'blur'}
           ],
-          verification: [
-            {required: true, message: '请输入验证码', trigger: 'blur'}
+          verify: [
+            {validator: validateCode, trigger: 'blur'}
           ]
         }
       }
@@ -62,10 +69,18 @@
     },
     methods: {
       handleSubmit(formName){
+        this.$refs[formName].validate((valid) => {
+          if (valid) {
+            this.$router.push({path: '/findpwdNext', query: {phone: this.ruleForm.phone}})
+          } else {
+            return false
+          }
+        })
       },
       // 接收子组件传递的参数
-      imgVerify(verifyCode){
-        console.log(verifyCode)
+      imgVerify(verifyCode) {
+        this.verifyCode = verifyCode
+        console.log(this.verifyCode)
       }
     },
     components: {
@@ -83,7 +98,7 @@
       .login-form-group
         button
           width: 100%
-        .password
+        .verify
           position: relative
           .img-verify
             position: absolute
