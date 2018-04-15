@@ -206,6 +206,13 @@ export default new Router({
       }
     },
     {
+      path: '/findpwdSuccess',
+      name: 'FindpwdSuccess',
+      component: resolve => {
+        require(['components/find-password/findpwd-success'], resolve) // 找回密码成功
+      }
+    },
+    {
       path: '/regsister',
       name: 'Regsister',
       component: resolve => {

@@ -34,8 +34,10 @@
   import ImgVerify from 'base/img-verify/img-verify'
   import Header from 'base/header/header'
   import {regPhone} from 'common/js/common'
-  export default{
-    data(){
+  import {getData} from 'api/post'
+
+  export default {
+    data() {
       let validateCode = (rule, value, callback) => {
         if (!value) {
           return callback(new Error('验证码不能为空'))
@@ -64,14 +66,14 @@
         }
       }
     },
-    mounted(){
+    mounted() {
 
     },
     methods: {
-      handleSubmit(formName){
+      handleSubmit(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            this.$router.push({path: '/findpwdNext', query: {phone: this.ruleForm.phone}})
+            this._getData()
           } else {
             return false
           }
@@ -81,6 +83,15 @@
       imgVerify(verifyCode) {
         this.verifyCode = verifyCode
         console.log(this.verifyCode)
+      },
+      _getData() {
+        getData('/findpwd/validate', '', {mobile: this.ruleForm.phone}).then(res => {
+          if (res.data.success && res.data.code === '0') {
+            this.$router.push({path: '/findpwdNext', query: {phone: this.ruleForm.phone}})
+          } else {
+            this.$refs.verify.error = res.data.msg
+          }
+        })
       }
     },
     components: {

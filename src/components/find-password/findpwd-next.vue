@@ -10,7 +10,9 @@
               <p>请输入校验码完成密码重置</p>
             </el-form-item>
             <el-form-item class="tip">
-              <p>若没有收到，请&nbsp;<router-link to="/findpwd" class="findpwd-btn">返回</router-link>&nbsp;尝试</p>
+              <p>若没有收到，请&nbsp;
+                <router-link to="/findpwd" class="findpwd-btn">返回</router-link>&nbsp;尝试
+              </p>
             </el-form-item>
           </div>
           <div class="login-form-group">
@@ -51,8 +53,10 @@
 
 <script type="text/ecmascript-6">
   import Header from 'base/header/header'
+  import {getData} from 'api/post'
+
   export default {
-    data(){
+    data() {
       let validateCode = (rule, value, callback) => {
         if (!value) {
           callback(new Error('请输入短信验证码'))
@@ -91,16 +95,29 @@
         }
       }
     },
-    mounted(){
-      const phone = this.$route.query.phone
+    mounted() {
     },
     methods: {
-      handleSubmit(formName){
+      handleSubmit(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
-            console.warn('success')
+            this._getData()
           } else {
             console.error('出错了')
+          }
+        })
+      },
+      _getData() {
+        const data = {
+          mobile: this.$route.query.phone,
+          pwd: this.ruleForm.password,
+          smsCode: this.ruleForm.verifyCode
+        }
+        getData('/findpwd/updatePwd', '', data).then(res => {
+          if (res.data.success && res.data.code === '0') {
+            this.$router.push('/findpwdSuccess')
+          } else {
+            this.$refs.confirmPassword.error = res.data.msg
           }
         })
       }
