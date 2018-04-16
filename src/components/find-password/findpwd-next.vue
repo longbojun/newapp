@@ -20,7 +20,7 @@
               <el-input type="text"
                         placeholder="短信验证码"
                         v-model="ruleForm.verifyCode"
-                        :maxlength="4">
+                        :maxlength="6">
               </el-input>
             </el-form-item>
           </div>
