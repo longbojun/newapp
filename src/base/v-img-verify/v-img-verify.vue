@@ -1,59 +1,60 @@
 <template>
   <div class="img-verify">
-    <canvas ref="verify" :width="width" :height="height" @click="handleDraw"></canvas>
+    <canvas
+      ref="verify"
+      :width="width"
+      :height="height"
+      @click="handleDraw"></canvas>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
-  export default{
-    data(){
+  export default {
+    data() {
       return {
         pool: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890', // 字符串
         width: 120,
         height: 40
       }
     },
-    mounted(){
-      this.printCanvas()
+    mounted() {
+      this.draw()
     },
     methods: {
       // 1.随机数
-      randomNum(min, max){
+      randomNum(min, max) {
         return parseInt(Math.random() * (max - min) + min)
       },
       // 2.随机颜色
-      randomColor(min, max){
+      randomColor(min, max) {
         const r = this.randomNum(min, max)
         const g = this.randomNum(min, max)
         const b = this.randomNum(min, max)
         return `rgb(${r},${g},${b})`
       },
       // 点击图片重新绘制
-      handleDraw(){
-        this.printCanvas()
+      handleDraw() {
+        this.draw()
       },
       // 绘制图片
-      printCanvas(){
+      draw() {
         // 3.填充背景颜色，背景颜色要浅一点
         const ctx = this.$refs.verify.getContext('2d')
         // 填充颜色
         ctx.fillStyle = this.randomColor(180, 230)
         // 填充的位置
         ctx.fillRect(0, 0, this.width, this.height)
-
         // 定义paramText
-        let paramText = ''
-
+        let imgCode = ''
         // 4.随机产生字符串，并且随机旋转
         for (let i = 0; i < 4; i++) {
           // 随机的四个字
           const text = this.pool[this.randomNum(0, this.pool.length)]
-          paramText += text
+          imgCode += text
           // 随机的字体大小
           const fontSize = this.randomNum(18, 40)
           // 字体随机的旋转角度
           const deg = this.randomNum(-30, 30)
-
           /*
            * 绘制文字并让四个文字在不同的位置显示的思路 :
            * 1、定义字体
@@ -85,7 +86,6 @@
           ctx.fillText(text, -15 + 5, -15)
           ctx.restore()
         }
-
         // 5.随机产生5条干扰线,干扰线的颜色要浅一点
         for (let i = 0; i < 5; i++) {
           ctx.beginPath()
@@ -95,7 +95,6 @@
           ctx.closePath()
           ctx.stroke()
         }
-
         // 6.随机产生40个干扰的小点
         for (let i = 0; i < 40; i++) {
           ctx.beginPath()
@@ -105,12 +104,13 @@
           ctx.fill()
         }
         // 将生成的四个字传递给父组件
-        this.$emit('printCanvas',  paramText)
+        this.$emit('imgCode', imgCode)
       }
     }
   }
 </script>
-
-<style lang="stylus">
-
+<style type="text/css">
+  .img-verify canvas {
+    cursor: pointer;
+  }
 </style>

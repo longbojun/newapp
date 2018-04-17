@@ -19,7 +19,7 @@
                       v-model="ruleForm.verify"
                       :maxlength="4">
             </el-input>
-            <ImgVerify class="img-verify" @printCanvas="imgVerify"></ImgVerify>
+            <ImgVerify class="img-verify" @imgCode="imgCode" ref="imgVerify"></ImgVerify>
           </el-form-item>
         </div>
         <div class="login-form-group">
@@ -31,7 +31,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import ImgVerify from 'base/img-verify/img-verify'
+  import ImgVerify from 'base/v-img-verify/v-img-verify'
   import Header from 'base/header/header'
   import {regPhone} from 'common/js/common'
   import {getData} from 'api/post'
@@ -42,6 +42,7 @@
         if (!value) {
           return callback(new Error('验证码不能为空'))
         } else if (value.toUpperCase() !== this.verifyCode) {
+          this.$refs.imgVerify.draw()
           return callback(new Error('验证码输入有误'))
         } else {
           callback()
@@ -80,9 +81,9 @@
         })
       },
       // 接收子组件传递的参数
-      imgVerify(verifyCode) {
+      imgCode(verifyCode) {
         this.verifyCode = verifyCode
-        console.log(this.verifyCode)
+//        console.log(this.verifyCode)
       },
       _getData() {
         getData('/findpwd/validate', '', {mobile: this.ruleForm.phone}).then(res => {
