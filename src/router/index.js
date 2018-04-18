@@ -192,6 +192,13 @@ export default new Router({
       }
     },
     {
+      path: '/registerNext',
+      name: 'RegisterNext',
+      component: resolve => {
+        require(['components/register/register-next'], resolve) // 注册下一步
+      }
+    },
+    {
       path: '/findpwd',
       name: 'FindPassword',
       component: resolve => {
@@ -210,13 +217,6 @@ export default new Router({
       name: 'FindpwdSuccess',
       component: resolve => {
         require(['components/find-password/findpwd-success'], resolve) // 找回密码成功
-      }
-    },
-    {
-      path: '/regsister',
-      name: 'Regsister',
-      component: resolve => {
-        require(['components/regsister/regsister'], resolve) // 注册
       }
     },
     {
