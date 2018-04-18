@@ -218,6 +218,8 @@
       .register-form
         padding: 20px 10px
         .register-form-group
+          .el-form-item__error
+            padding-left: 24px
           .el-input__inner
             border-radius: 40px
           button
