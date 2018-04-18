@@ -2,7 +2,7 @@
   <div class="record-list">
     <Header :title="title"></Header>
     <ul class="content">
-      <li v-for="(item,index) in list" :key="item.investTimeStr">
+      <li v-for="(item,index) in list" :key="item.investTimeStr" class="content-item">
         <el-row>
           <el-col :span="2">
             <div class="rank">{{index}}</div>
@@ -25,6 +25,14 @@
         </el-row>
       </li>
     </ul>
+    <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      background
+      layout="prev, pager, next"
+      :page-size="10"
+      :total="total">
+    </el-pagination>
   </div>
 </template>
 
@@ -36,20 +44,27 @@
     data(){
       return {
         title: '投资记录',
-        list: []
+        list: [],
+        total: 0
       }
     },
     mounted(){
-      const data = {
-        id: this.$route.query.id,
-        pageNo: 1,
-        pageSize: 10
-      }
-      getData('/invest/investRecord', '', data).then(res => {
-          if (res.data.success && res.data.code === '0'){
+      this._getData(1, 10)
+    },
+    methods: {
+      _getData(pageNo, pageSize){
+        let data = {
+          id: this.$route.query.id,
+          pageNo: pageNo,
+          pageSize: pageSize
+        }
+        getData('/invest/investRecord', '', data).then(res => {
+          if (res.data.success && res.data.code === '0') {
             this.list = res.data.data.list
+            this.total = res.data.data.totalCount
           }
-      })
+        })
+      }
     },
     filters: {
       formatDate(time){
@@ -64,11 +79,15 @@
 
 <style lang="stylus">
   .record-list
-    background: #fff
     .content
       margin-top: 60px
-      li
+      &:before
+        display: table
+        content: ''
+      .content-item
+        margin: 12px 0
         padding: 10px 5px
+        background: #fff
         .first-row
           margin-bottom: 10px
         .rank
@@ -77,4 +96,7 @@
           text-align: left
         .txt-right
           text-align: right
+    .el-pagination
+      margin: 20px 0
+      text-align: right
 </style>
