@@ -221,6 +221,7 @@
           .el-form-item__error
             padding-left: 24px
           .el-input__inner
+            line-height: normal
             border-radius: 40px
           button
             border-radius: 40px

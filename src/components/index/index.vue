@@ -14,10 +14,10 @@
       </el-row>
       <el-row class="safe-show">
         <el-col :span="8">
-          <a href="#">
+          <router-link to="/activity">
             <img src="./hot.png" width="36">
             <p>热门活动</p>
-          </a>
+          </router-link>
         </el-col>
         <el-col :span="8">
           <a href="#">
