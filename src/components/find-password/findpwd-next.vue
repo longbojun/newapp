@@ -132,6 +132,8 @@
     .findpwd-next-content
       padding: 20px 10px
       .login-form-group
+        .el-input__inner
+          line-height: normal
         .tip
           color: #C8050E
           .el-form-item__content

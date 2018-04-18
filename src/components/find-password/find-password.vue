@@ -108,6 +108,8 @@
     .find-password-content
       padding: 20px 10px
       .login-form-group
+        .el-input__inner
+          line-height: normal
         button
           width: 100%
         .verify

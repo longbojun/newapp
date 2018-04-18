@@ -166,6 +166,8 @@
       margin-top: 60px
       padding: 20px 30px
       .register-form-group
+        .el-input__inner
+          line-height: normal
         .phone
           text-align: center
         button
