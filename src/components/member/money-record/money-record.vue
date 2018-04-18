@@ -10,14 +10,21 @@
           </el-row>
           <el-row class="row-content-margin">
             <el-col :span="12" class="font-12">{{item.dealTimeStr | _formatDate}}</el-col>
-            <el-col :span="12" class="text-right font-12 remark-btn">备注</el-col>
+            <el-col :span="12" class="text-right font-12 remark-btn" @click.native="handleToggle">备注</el-col>
           </el-row>
-          <el-row class="row-content-margin">
+          <el-row class="row-content-margin remark-content">
             <el-col :span="24" class="remark font-12">{{item.remark}}</el-col>
           </el-row>
         </el-col>
       </el-row>
     </div>
+    <el-pagination
+      @current-change="handleCurrentChange"
+      background
+      layout="prev, pager, next"
+      :page-size="pageSize"
+      :total="total">
+    </el-pagination>
   </div>
 </template>
 
@@ -29,18 +36,20 @@
     data(){
       return {
         title: '资金记录',
-        record: []
+        record: [],
+        total: 0,
+        pageSize: 10
       }
     },
     mounted(){
-      this._getData()
+      this._getData(1)
     },
     methods: {
-      _getData(){
+      _getData(pageNo){
         const data = {
           endTime: '',
-          pageNo: 1,
-          pageSize: 10,
+          pageNo: pageNo,
+          pageSize: this.pageSize,
           startTime: '',
           timeSelect: '',
           tradeType: ''
@@ -48,10 +57,22 @@
         getData('/account/myAccountLogList', 1, data).then(res => {
           if (res.data.success && res.data.code === '0') {
             this.record = res.data.data.list
+            this.total = res.data.data.totalCount
           } else if (res.data.code === 'c017') {
             this.$router.push('/login')
           }
         })
+      },
+      handleCurrentChange(val) {
+        this._getData(val)
+      },
+      handleToggle(e){
+        let style = e.toElement.parentElement.nextElementSibling.style.display
+        if (style === 'none' || style === '') {
+          e.toElement.parentElement.nextElementSibling.style.display = 'block'
+        } else {
+          e.toElement.parentElement.nextElementSibling.style.display = 'none'
+        }
       }
     },
     filters: {
@@ -66,7 +87,10 @@
 <style lang="stylus">
   .money-record
     .money-record-content
-      margin: 65px 0
+      margin-top: 60px
+      &:before
+        display: table
+        content: ''
       .row-content
         padding: 10px 20px
         background: #fff
@@ -82,4 +106,8 @@
             font-size: 12px
           .remark-btn
             color: #0094FF
+        .remark-content
+          display: none
+    .el-pagination
+      text-align: right
 </style>

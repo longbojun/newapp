@@ -36,6 +36,13 @@
         </el-col>
       </el-row>
     </div>
+    <el-pagination
+      @current-change="handleCurrentChange"
+      background
+      layout="prev, pager, next"
+      :page-size="pageSize"
+      :total="total">
+    </el-pagination>
   </div>
 </template>
 
@@ -46,21 +53,26 @@
     data(){
       return {
         title: '投资项目',
-        invest: {}
+        invest: {},
+        pageSize: 5
       }
     },
     mounted(){
-      this._getData()
+      this._getData(1)
     },
     methods: {
-      _getData(){
-        getData('/account/myInvestProject', 1, {pageNo: 1, pageSize: 10}).then(res => {
+      _getData(pageNo){
+        getData('/account/myInvestProject', 1, {pageNo: pageNo, pageSize: this.pageSize}).then(res => {
           if (res.data.success && res.data.code === '0') {
             this.invest = res.data.data
+            this.total = res.data.data.totalCount
           } else if (res.data.code === 'c017' || res.data.code === 'c012') {
             this.$router.push('/login')
           }
         })
+      },
+      handleCurrentChange(val) {
+        this._getData(val)
       }
     },
     components: {Header}

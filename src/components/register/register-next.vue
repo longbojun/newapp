@@ -130,10 +130,9 @@
         getData('/regist/smsRetry', '', data).then(res => {
           if (res.data.success && res.data.code === '0') {
             this.$router.push('/login')
-          }else if (res.data.code === 'a007'){
-              this.$router.push('/register')
-          }
-          else {
+          } else if (res.data.code === 'a007') {
+            this.$router.push('/register')
+          } else {
             this.$refs.password.error = res.data.msg
           }
         })
@@ -145,7 +144,7 @@
         this.flag = false
         let t = 60
         this.time = setInterval(() => {
-          t--;
+          t--
           if (t === 0) {
             clearInterval(this.time)
             this.$refs.time.innerHTML = '获取验证码'

@@ -26,7 +26,6 @@
       </li>
     </ul>
     <el-pagination
-      @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
       background
       layout="prev, pager, next"
@@ -64,6 +63,9 @@
             this.total = res.data.data.totalCount
           }
         })
+      },
+      handleCurrentChange(val) {
+        this._getData(val, 10)
       }
     },
     filters: {

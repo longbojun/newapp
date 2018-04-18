@@ -5,11 +5,10 @@
       <BidExp :expList="expList"></BidExp>
       <BidItem :bidList="bidList"></BidItem>
       <el-pagination
-        @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
         background
         layout="prev, pager, next"
-        :page-size="10"
+        :page-size="pageSize"
         :total="total">
       </el-pagination>
     </div>
@@ -29,19 +28,20 @@
         title: '投资列表',
         expList: [],
         bidList: [],
-        total: 0
+        total: 0,
+        pageSize: 10
       }
     },
     mounted(){
       this._getData(1, 10)
     },
     methods: {
-      _getData(pageNo, pageSize){
+      _getData(pageNo){
         const data = {
           aprSearch: '',
           nameSearch: '',
           pageNo: pageNo,
-          pageSize: pageSize,
+          pageSize: this.pageSize,
           statusSearch: '',
           timeSearch: '',
           typeSearch: ''
@@ -61,11 +61,8 @@
           }
         })
       },
-      handleSizeChange(val) {
-        console.log(`每页 ${val} 条`)
-      },
       handleCurrentChange(val) {
-        this._getData(val, 10)
+        this._getData(val)
       }
     },
     components: {
