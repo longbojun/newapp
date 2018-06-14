@@ -1,21 +1,86 @@
-# yinmi
+# app
 
-> A Vue.js project
+### 安装
 
-## Build Setup
+	git clone git@github.com:luguanrui/newapp.git
+	
+	cd newapp
+	
+	npm install
+	
+	npm run dev
 
-``` bash
-# install dependencies
-npm install
+### 样式展示
 
-# serve with hot reload at localhost:8080
-npm run dev
+![show](./static/show.jpg)
 
-# build for production with minification
-npm run build
+### elementUI主题色修改
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
+    npm i element-theme -g
+    
+    npm i element-theme-chalk -D
+    
+    et -i [可以自定义变量文件]
+    
+    element-variables.scss修改变量
+    
+    et
+    
+    import '../theme/index.css'
+    
+    import ElementUI from 'element-ui'
+    
+    import Vue from 'vue'
+    
+    Vue.use(ElementUI)
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+### 路由懒加载
+
+router/index.js
+
+	import Vue from 'vue'
+	import Router from 'vue-router'	
+	Vue.use(Router)
+	export default new Router({
+		mode: 'history', // 默认hash
+  		routes: [
+  			{
+	  			path: '/index',
+	      		name: 'Index',
+	      		component: resolve => {require(['components/index/index'], resolve)}
+  			},
+  			...
+  		]
+	})
+	
+懒加载的作用：将页面进行划分，需要加载的时候再加载
+
+### 加上index.html加上shortcut失效
+
+  1、根目录下加入图标，
+  
+  2、在build/webpack.dev.conf.js中添加favicon
+  
+     new HtmlWebpackPlugin({
+        filename: 'index.html',
+        template: 'index.html',
+        inject: true,
+        favicon:'./favicon.ico'
+      }),
+      
+### 图形验证码
+
+[自定义组件](https://github.com/luguanrui/vue-img-verify)
+
+### 参数传递
+
+传递参数：this.$router.push({path: '/findpwdNext', query: {phone:'0000'}})
+
+接收参数：this.$route.query.phone
+
+### 说明
+
+目前接口服务器已停
+
+
+

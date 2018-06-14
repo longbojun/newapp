@@ -1,9 +1,11 @@
 import axios from 'axios'
 import Cookies from 'js-cookie'
 import {Loading} from 'element-ui'
+
 const md5 = require('js-md5')
 // 定义loading
 let loading
+
 function startLoading() {
   loading = Loading.service({
     fullscreen: true,
@@ -65,6 +67,7 @@ export function post(config) {
     })
   })
 }
+
 // 区分需要token和data的
 export function getData(url, token = '', data = '') {
   if (!token) {
@@ -90,6 +93,7 @@ export function setCookie(obj) {
     Cookies.set(key, obj[key])
   }
 }
+
 // 获取一个cookie
 export function getCookie(key) {
   return Cookies.get(key)
